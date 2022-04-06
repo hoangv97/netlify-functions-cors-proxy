@@ -8,7 +8,7 @@ const corsHeaders = {
 exports.handler = async (event, context) => {
   // console.log(event);
 
-  if (event.httpMethod === 'OPTIONS') {
+  if (event.httpMethod.toUpperCase() === 'OPTIONS') {
     // console.log(event.headers);
     const respHeaders = {
       ...corsHeaders,
@@ -32,8 +32,8 @@ exports.handler = async (event, context) => {
   try {
     const init = {
       headers,
-      method: event.httpMethod,
-      body: ['POST', 'PUT', 'PATCH'].includes(event.httpMethod)
+      method: event.httpMethod.toUpperCase(),
+      body: ['POST', 'PUT', 'PATCH'].includes(event.httpMethod.toUpperCase())
         ? event.body
         : undefined,
     };
